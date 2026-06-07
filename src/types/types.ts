@@ -45,10 +45,10 @@ export interface Review {
 
 // Cart actions
 export type CartAction =
-  | { type: 'ADD_TO_CART'; payload: Player }
-  | { type: 'REMOVE_FROM_CART'; payload: string }
-  | { type: 'INCREASE_QTY'; payload: string }
-  | { type: 'DECREASE_QTY'; payload: string }
+  | { type: 'ADD_TO_CART'; data: Player }
+  | { type: 'REMOVE_FROM_CART'; data: string }
+  | { type: 'INCREASE_QTY'; data: string }
+  | { type: 'DECREASE_QTY'; data: string }
   | { type: 'CLEAR_CART' };
 
 export interface CartState {
