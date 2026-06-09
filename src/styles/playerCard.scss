@@ -1,0 +1,159 @@
+$card-transition: 0.3s ease;
+
+.player-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform $card-transition, box-shadow $card-transition;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    border-color: rgba(245, 197, 24, 0.3);
+  }
+
+  // Shirt image on top
+  .shirt-section {
+    background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 160px;
+    position: relative;
+
+    .shirt-img {
+      max-height: 130px;
+      max-width: 120px;
+      object-fit: contain;
+      transition: transform $card-transition;
+    }
+  }
+
+  &:hover .shirt-img {
+    transform: scale(1.05);
+  }
+
+  // Player info section
+  .card-info {
+    padding: 14px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .player-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      color: #ffffff;
+      line-height: 1.1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .flag {
+        font-size: 1rem;
+      }
+    }
+
+    .player-info {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+
+      .player-position {
+        background: rgba(34, 197, 94, 0.1);
+        color: #86efac;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .player-age {
+        background: rgba(255, 255, 255, 0.07);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+
+    // Price + button 
+    .card-bottom {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+      .price {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.4rem;
+        color: #f5c518;
+        letter-spacing: 1px;
+      }
+
+      .add-btn {
+        background: linear-gradient(135deg, #22a322, #1a7a1a);
+        color: white;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all $card-transition;
+        letter-spacing: 0.3px;
+
+        &:hover {
+          background: linear-gradient(135deg, #2dbe2d, #22a322);
+          transform: scale(1.05);
+        }
+
+        // When already in cart, show different style
+        &.in-cart {
+          background: linear-gradient(135deg, #f5c518, #d4a017);
+          color: #1a1a1a;
+        }
+      }
+    }
+  }
+}
+
+// Small version for compact list view
+.player-card.compact {
+  flex-direction: row;
+  max-height: 100px;
+
+  .shirt-section {
+    min-height: unset;
+    width: 80px;
+    padding: 10px;
+    flex-shrink: 0; // doesnt shrink when card gets smaller
+
+    .shirt-img {
+      max-height: 70px;
+      max-width: 60px;
+    }
+  }
+
+  .card-info {
+    padding: 10px 12px;
+
+    .player-name {
+      font-size: 1rem;
+    }
+  }
+}
