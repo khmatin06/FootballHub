@@ -1,0 +1,176 @@
+// Navbar styling
+
+$navbar-height: 64px;
+$transition: 0.2s ease;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: $navbar-height;
+  background: rgba(10, 61, 10, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+
+  .navbar-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  // Logo area
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+
+    .logo-ball {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(245, 197, 24, 0.6);
+    }
+
+    .logo-text {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.7rem;
+      letter-spacing: 2px;
+      color: #ffffff;
+      line-height: 1;
+
+      span {
+        color: #f5c518;
+      }
+    }
+  }
+
+  // Navigation links
+  .navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+
+    li a {
+      color: rgba(255, 255, 255, 0.75);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 6px 14px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+
+      &:hover {
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      // Active, Selected page
+      &.active {
+        color: #f5c518;
+        background: rgba(245, 197, 24, 0.12);
+        border: 1px solid rgba(245, 196, 21, 0.25);
+      }
+    }
+  }
+
+  // Cart button in the nav
+  .cart-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245, 197, 24, 0.15);
+    border: 1px solid rgba(245, 197, 24, 0.35);
+    color: #f5c518;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba(245, 197, 24, 0.25);
+    }
+
+    .cart-count {
+      background: #f5c518;
+      color: #1a1a1a;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  // Mobile hamburger
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+
+    span {
+      display: block;
+      width: 25px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+    }
+  }
+
+  // Mobile drawer
+  .mobile-menu {
+    position: fixed;
+    top: $navbar-height;
+    left: 0;
+    right: 0;
+    background: rgba(10, 61, 10, 0.97);
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 99;
+
+    a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 8px;
+
+      &:hover, &.active {
+        background: rgba(245, 197, 24, 0.12);
+        color: #f5c518;
+      }
+    }
+  }
+
+  // Responsivity for mobile
+  @media (max-width: 768px) {
+    .navbar-links {
+      display: none;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+  }
+}
