@@ -5,7 +5,7 @@ interface LayoutProps {
   children: ReactNode;
 }
 
-// // Page layout with page content and navbar
+//Page layout with page content and navbar
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className="pitch-bg min-h-screen">
