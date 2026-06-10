@@ -33,14 +33,14 @@ function cartReducer(state: CartState, action: CartAction): CartState {
     case 'REMOVE_FROM_CART':
       return {
         ...state,
-        items: state.items.filter(item => item.player.id !== action.data.id),
+        items: state.items.filter(item => item.player.id !== action.data),
       };
 
     case 'INCREASE_QTY':
       return {
         ...state,
         items: state.items.map(item =>
-          item.player.id === action.data.id
+          item.player.id === action.data
             ? { ...item, quantity: item.quantity + 1 }
             : item
         ),
@@ -50,7 +50,7 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         items: state.items.map(item =>
-          item.player.id === action.data.id
+          item.player.id === action.data
             ? { ...item, quantity: Math.max(1, item.quantity - 1) }
             : item
         ),
@@ -84,7 +84,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   // Functions to simplify the work (pages don't have to dispatch manually)
   const addToCart = (player: Player) => dispatch({ type: 'ADD_TO_CART', data: player });
 
-  const removeFromCart = (playerId: string) => dispatch({ type: 'REMOVE_FROM_CART', data: { id: playerId } });
+  const removeFromCart = (playerId: string) => dispatch({ type: 'REMOVE_FROM_CART', data: playerId });
 
   const getTotalItems = () => state.items.reduce((sum, item) => sum + item.quantity, 0); 
 
