@@ -14,7 +14,7 @@ export default function PlayerModal({ player, teamName, onClose }: PlayerModalPr
   const inCart = isInCart(player.id);
   const qty = getItemQty(player.id);
 
-  // Close modal when pressing Escape
+  // Close a popup window when pressing Escape
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -24,10 +24,10 @@ export default function PlayerModal({ player, teamName, onClose }: PlayerModalPr
   }, [onClose]);
 
   return (
-    // Backdrop - clicking it closes modal
+    // Clicking it closes a popup window, but clicking inside the modal content won't close it
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)' }}
+      style={{ background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(4px)' }} // blurs background
       onClick={onClose}
     >
       {/* Modal box - stop click propagation so it doesn't close when clicking inside */}
@@ -75,8 +75,7 @@ export default function PlayerModal({ player, teamName, onClose }: PlayerModalPr
             <div className="text-sm text-white/60 mt-1">{player.country}</div>
           </div>
         </div>
-
-        {/* Stats grid - removed rating, now just position and age */}
+        
         <div className="p-6">
           <div className="grid grid-cols-2 gap-3 mb-5">
             {[
@@ -119,7 +118,7 @@ export default function PlayerModal({ player, teamName, onClose }: PlayerModalPr
               </div>
               {inCart && (
                 <div className="text-xs text-green-400 font-semibold mt-0.5">
-                  {qty}× in your cart
+                  {qty}* in your cart
                 </div>
               )}
             </div>
