@@ -4,7 +4,7 @@ import { leagues } from '../data/data';
 import Button from '../components/Button';
 
 export default function HomePage() {
-  // Simple loading simulation so we can show a loading state
+  // Loading simulation so we can show a loading state
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* ===== HERO SECTION ===== */}
+      {/* HERO SECTION */}
       <section
         className="relative overflow-hidden pitch-lines"
         style={{
@@ -46,7 +46,7 @@ export default function HomePage() {
           }}
         />
 
-        {/* Floating ball 1 - top right */}
+        {/* Ball 1 - top right one */}
         <div
           className="absolute float-ball-1 pointer-events-none"
           style={{ top: '8%', right: '6%', opacity: 0.5 }}
@@ -58,7 +58,7 @@ export default function HomePage() {
           />
         </div>
 
-        {/* Floating ball 2 - bottom left */}
+        {/* Ball 2 - bottom left one */}
         <div
           className="absolute float-ball-2 pointer-events-none"
           style={{ bottom: '10%', left: '5%', opacity: 0.35 }}
@@ -138,7 +138,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== LEAGUES SECTION ===== */}
+      {/* Leagues */}
       <section className="max-w-6xl mx-auto px-6 py-20">
         <div className="text-center mb-12">
           <h2
@@ -182,7 +182,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ===== FEATURED SECTION - Football balls ===== */}
+      {/* Football balls */}
       <section
         className="py-20 px-6"
         style={{ background: 'rgba(0,0,0,0.2)' }}
@@ -242,7 +242,7 @@ export default function HomePage() {
             </div>
             <div className="mt-6">
               <Link to="/shop">
-                <Button variant="primary" size="md">Start Shopping →</Button>
+                <Button variant="primary" size="md">Start Shopping</Button>
               </Link>
             </div>
           </div>
