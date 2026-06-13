@@ -8,7 +8,7 @@ export default function LeaguesPage() {
       <div className="mb-12 text-center">
         <h1
           className="text-white mb-3"
-          style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '3.2rem', letterSpacing: '3px' }}
+          style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '3.3rem', letterSpacing: '3px' }}
         >
           All <span style={{ color: '#f5c518' }}>Leagues</span>
         </h1>
@@ -17,7 +17,7 @@ export default function LeaguesPage() {
         </p>
       </div>
 
-      {/* League grid */}
+      {/* All Leagues */}
       <div className="grid gap-6 md:grid-cols-2">
         {leagues.map((league) => (
           <Link
@@ -36,7 +36,7 @@ export default function LeaguesPage() {
               />
             </div>
 
-            {/* Info */}
+            {/* Information */}
             <div className="flex-1">
               <div
                 className="text-white font-bold"
@@ -69,7 +69,6 @@ export default function LeaguesPage() {
               </div>
             </div>
 
-            {/* Arrow */}
             <div className="text-white/30 text-2xl">→</div>
           </Link>
         ))}
