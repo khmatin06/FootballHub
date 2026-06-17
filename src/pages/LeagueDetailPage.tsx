@@ -6,7 +6,7 @@ import PlayerCard from '../components/PlayerCard';
 import PlayerModal from '../components/PlayerDetail';
 
 export default function LeagueDetailPage() {
-  const { leagueId } = useParams<{ leagueId: string }>();
+  const { leagueId } = useParams();
 
   // Find the league
   const league = leagues.find((l) => l.id === leagueId);
@@ -21,7 +21,6 @@ export default function LeagueDetailPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-12">
-      {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-sm font-semibold mb-8" style={{ color: 'rgba(255,255,255,0.45)' }}>
         <Link to="/leagues" className="hover:text-yellow-400 transition-colors">Leagues</Link>
         <span>›</span>
