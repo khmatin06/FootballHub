@@ -4,6 +4,7 @@ import type { Player } from '../types/types';
 import PlayerCard from '../components/PlayerCard';
 import PlayerModal from '../components/PlayerDetail';
 import Input from '../components/Input';
+import { getPlayerTeam } from '../utils/utils';
 
 // Flatten all players into one big list for the shop
 function getAllPlayers(): (Player & { leagueName: string; teamName: string })[] {
@@ -11,7 +12,7 @@ function getAllPlayers(): (Player & { leagueName: string; teamName: string })[] 
   for (const league of leagues) {
     for (const team of league.teams) {
       for (const player of team.players) {
-        result.push({ ...player, leagueName: league.name, teamName: team.name });
+        result.push({ ...player, leagueName: league.name, teamName: getPlayerTeam(player.id), }); // utils function to get team name for a player
       }
     }
   }
@@ -21,7 +22,7 @@ function getAllPlayers(): (Player & { leagueName: string; teamName: string })[] 
 const allPlayers = getAllPlayers();
 
 // All unique positions from data
-const allPositions = ['All', ...Array.from(new Set(allPlayers.map((p) => p.position))).sort()];
+const allPositions = ['All', ...[...new Set(allPlayers.map(p => p.position))].sort()];
 const allLeagues = ['All', ...leagues.map((l) => l.name)];
 
 export default function ShopPage() {
