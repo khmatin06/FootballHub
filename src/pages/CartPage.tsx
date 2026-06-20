@@ -6,7 +6,7 @@ export default function CartPage() {
   const { state, dispatch, getTotalPrice, getTotalItems } = useCart();
   const items = state.items;
 
-  // Empty cart state
+  // Empty cart 
   if (items.length === 0) {
     return (
       <div className="max-w-2xl mx-auto px-6 py-20">
@@ -84,11 +84,11 @@ export default function CartPage() {
                   className="mt-1"
                   style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.2rem', color: '#f5c518' }}
                 >
-                  ${item.player.price.toFixed(2)}
+                  ${item.player.price}
                 </div>
               </div>
 
-              {/* Quantity controls */}
+              {/* Quantity buttons */}
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => dispatch({ type: 'DECREASE_QTY', data: item.player.id })}
@@ -107,12 +107,12 @@ export default function CartPage() {
                 </button>
               </div>
 
-              {/* Subtotal */}
+              {/* Total Price */}
               <div
                 className="text-right min-w-16 hidden sm:block"
                 style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.1rem', color: '#86efac' }}
               >
-                ${(item.player.price * item.quantity).toFixed(2)}
+                ${(item.player.price * item.quantity)}
               </div>
 
               {/* Remove button */}
@@ -127,7 +127,7 @@ export default function CartPage() {
           ))}
         </div>
 
-        {/* Order summary sidebar */}
+        {/* Summary */}
         <div
           className="lg:w-72 rounded-2xl p-6 self-start sticky top-20"
           style={{
@@ -150,7 +150,7 @@ export default function CartPage() {
                   {item.player.name} ×{item.quantity}
                 </span>
                 <span className="text-white flex-shrink-0">
-                  ${(item.player.price * item.quantity).toFixed(2)}
+                  ${(item.player.price * item.quantity)}
                 </span>
               </div>
             ))}
@@ -165,15 +165,15 @@ export default function CartPage() {
               <span
                 style={{ fontFamily: 'Bebas Neue, cursive', fontSize: '1.8rem', color: '#f5c518' }}
               >
-                ${getTotalPrice().toFixed(2)}
+                ${getTotalPrice()}
               </span>
             </div>
           </div>
 
-          {/* Checkout buttons */}
+          {/* Buttons */}
           <div className="flex flex-col gap-3">
             <Button variant="gold" size="lg" className="w-full">
-              ✅ Checkout
+              Buy
             </Button>
             <Button
               variant="danger"
@@ -186,7 +186,7 @@ export default function CartPage() {
           </div>
 
           <p className="text-xs text-center mt-4" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            Free shipping on orders over $100
+            Free delivery on orders over $100
           </p>
         </div>
       </div>
