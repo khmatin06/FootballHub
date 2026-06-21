@@ -5,11 +5,19 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 
 // Get all player names for the dropdown
-const playerOptions = leagues.flatMap((l) =>
-  l.teams.flatMap((t) =>
-    t.players.map((p) => ({ id: p.id, name: p.name, team: t.name }))
-  )
-);
+const playerOptions: { id: string; name: string; team: string }[] = [];
+
+leagues.forEach((league) => {
+  league.teams.forEach((team) => {
+    team.players.forEach((player) => {
+      playerOptions.push({
+        id: player.id,
+        name: player.name,
+        team: team.name
+      });
+    });
+  });
+});
 
 // Some reviews
 const initialReviews: Review[] = [
@@ -20,7 +28,7 @@ const initialReviews: Review[] = [
     email: 'fan@example.com',
     position: 'Forward',
     comment: 'The Messi shirt arrived super fast and the quality is absolutely amazing. Worth every penny! I wear it to every match.',
-    createdAt: '2024-11-15',
+    createdAt: '2026-11-15',
   },
   {
     id: '2',
@@ -29,7 +37,7 @@ const initialReviews: Review[] = [
     email: 'norway@example.com',
     position: 'Striker',
     comment: 'Got the Haaland City shirt and honestly it looks even better in person than in the photos. The fabric is really good.',
-    createdAt: '2024-12-01',
+    createdAt: '2026-12-01',
   },
   {
     id: '3',
@@ -38,7 +46,7 @@ const initialReviews: Review[] = [
     email: 'paris@example.com',
     position: 'Forward',
     comment: 'Great shirt, shipped quickly. Only minor complaint is sizing runs slightly small, so maybe go one size up.',
-    createdAt: '2024-12-10',
+    createdAt: '2026-12-10',
   },
 ];
 
@@ -49,13 +57,6 @@ interface FormData {
   email: string;
   position: string;
   comment: string;
-}
-
-interface FormErrors {
-  playerName?: string;
-  userName?: string;
-  email?: string;
-  comment?: string;
 }
 
 export default function ReviewsPage() {
@@ -71,33 +72,42 @@ export default function ReviewsPage() {
     comment: '',
   });
 
-  const [errors, setErrors] = useState<FormErrors>({});
-
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user types
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
-    }
   }
 
-  // Simple validation function
+  // Check if all fields are filled correctly
   function validate(): boolean {
-    const newErrors: FormErrors = {};
-
-    if (!form.playerName) newErrors.playerName = 'Please select a player';
-    if (!form.userName.trim()) newErrors.userName = 'Name is required';
-    else if (form.userName.trim().length < 2) newErrors.userName = 'Name must be at least 2 characters';
-
-    if (!form.email.trim()) newErrors.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) newErrors.email = 'Invalid email format';
-
-    if (!form.comment.trim()) newErrors.comment = 'Please write a review';
-    else if (form.comment.trim().length < 10) newErrors.comment = 'Review must be at least 10 characters';
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!form.playerName) {
+      alert('Please select a player');
+      return false;
+    }
+    if (!form.userName.trim()) {
+      alert('Name is required');
+      return false;
+    }
+    if (form.userName.trim().length < 2) {
+      alert('Name must be at least 2 characters');
+      return false;
+    }
+    if (!form.email.trim()) {
+      alert('Email is required');
+      return false;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+      alert('Invalid email format');
+      return false;
+    }
+    if (!form.comment.trim()) {
+      alert('Please write a review');
+      return false;
+    }
+    if (form.comment.trim().length < 10) {
+      alert('Review must be at least 10 characters');
+      return false;
+    }
+    return true;
   }
 
   function handleSubmit(e: React.FormEvent) {
@@ -199,9 +209,6 @@ export default function ReviewsPage() {
                     </option>
                   ))}
                 </select>
-                {errors.playerName && (
-                  <span className="text-red-400 text-xs font-medium">{errors.playerName}</span>
-                )}
               </div>
 
               {/* Name */}
@@ -212,7 +219,6 @@ export default function ReviewsPage() {
                 onChange={handleChange}
                 placeholder="Your display name"
                 required
-                error={errors.userName}
               />
 
               {/* Email */}
@@ -224,7 +230,6 @@ export default function ReviewsPage() {
                 onChange={handleChange}
                 placeholder="your@email.com"
                 required
-                error={errors.email}
               />
 
               {/* Position / category */}
@@ -245,7 +250,7 @@ export default function ReviewsPage() {
                 </select>
               </div>
 
-              {/* Comment textarea */}
+              {/* Review text */}
               <div className="flex flex-col gap-1.5 md:col-span-2">
                 <label className="text-sm font-semibold text-white/70">
                   Your Review <span className="text-yellow-400">*</span>
@@ -259,13 +264,10 @@ export default function ReviewsPage() {
                   className="w-full px-4 py-2.5 rounded-lg text-white text-sm font-medium resize-none transition-colors"
                   style={{
                     background: 'rgba(255,255,255,0.06)',
-                    border: errors.comment ? '1px solid #f87171' : '1px solid rgba(255,255,255,0.15)',
+                    border: '1px solid rgba(255,255,255,0.15)',
                     fontFamily: 'Nunito, sans-serif',
                   }}
                 />
-                {errors.comment && (
-                  <span className="text-red-400 text-xs font-medium">{errors.comment}</span>
-                )}
               </div>
             </div>
 
@@ -305,7 +307,7 @@ export default function ReviewsPage() {
         ))}
       </div>
 
-      {/* Empty state if no reviews */}
+      {/* Empty state if there are no reviews */}
       {reviews.length === 0 && (
         <div className="empty-state">
           <div className="text-5xl mb-4">📝</div>
