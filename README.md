@@ -1,6 +1,6 @@
 # ⚽ FootballHub
 
-A football shirt shop built with React + TypeScript + Tailwind CSS for my university final project.
+A football shirt shop built with React + TypeScript + Tailwind CSS for my final project.
 
 ## Description
 
