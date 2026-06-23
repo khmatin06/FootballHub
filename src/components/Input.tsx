@@ -38,7 +38,7 @@ export default function Input({
         required={required}
         className={`
           w-full px-4 py-2.5
-          bg-white/8 border rounded-lg
+          bg-white/8 border rounded-full
           text-white placeholder-white/30
           font-medium text-sm
           transition-colors duration-150
