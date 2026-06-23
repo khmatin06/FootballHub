@@ -25,7 +25,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`
-        rounded-lg font-bold tracking-wide
+        rounded-full font-bold tracking-wide
         transition-all duration-200 ease-in-out
         active:scale-95
         disabled:opacity-40 disabled:cursor-not-allowed
